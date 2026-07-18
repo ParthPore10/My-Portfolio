@@ -240,3 +240,19 @@ if (projectGroups.length) {
     });
   });
 }
+
+const visualTypes = ["calibration", "markets", "fraud", "cache", "memory", "chess", "cardiac", "motion", "audio"];
+document.querySelectorAll(".project-card").forEach((card, index) => {
+  if (card.querySelector(".project-visual")) return;
+  const visual = document.createElement("div");
+  visual.className = `project-visual visual-${visualTypes[index] || "signal"}`;
+  visual.setAttribute("aria-hidden", "true");
+  visual.innerHTML = `
+    <span class="visual-kicker">${String(index + 1).padStart(2, "0")} / CASE STUDY</span>
+    <div class="visual-art">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <span class="visual-caption">PARTH PORE — SELECTED WORK</span>
+  `;
+  card.prepend(visual);
+});
