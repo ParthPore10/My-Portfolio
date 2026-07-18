@@ -180,3 +180,63 @@ body.modal-open{overflow:hidden}::selection{color:#000;background:var(--acid)}a,
   .doodle-orbit{top:72px}.doodle-graph{top:180px}
   .equation-one{top:290px}.equation-two{display:none}
 }
+
+/* Editorial capabilities sheet */
+.skill-popup-backdrop{align-items:center;padding:clamp(18px,4vw,64px);background:rgba(0,0,0,.8);backdrop-filter:blur(10px)}
+.skill-popup{width:min(1120px,100%);max-height:88vh;padding:clamp(36px,6vw,82px);color:#0a0a0a;background:#f0eee6;border:0;box-shadow:0 28px 100px rgba(0,0,0,.55)}
+.skill-popup::before{content:"CAPABILITIES / 2026";position:absolute;top:clamp(36px,6vw,82px);right:clamp(88px,10vw,138px);color:#6d6b64;font:8px var(--pixel)}
+.skill-popup-kicker{width:max-content;margin:0 0 28px;padding:6px 8px;color:#0a0a0a;background:var(--acid);font:7px var(--pixel)}
+.skill-popup h3{max-width:760px;margin:0 0 clamp(44px,7vw,86px);font-size:clamp(3rem,7vw,6.8rem);line-height:.86;letter-spacing:-.075em}
+.skill-popup-close{top:20px;right:20px;width:46px;height:46px;color:#0a0a0a;background:transparent;border:1px solid #0a0a0a;font-size:20px}
+.skill-popup-close:hover{color:#0a0a0a;background:var(--acid)}
+.skill-groups{counter-reset:skill-row;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 54px;background:transparent}
+.skill-group{counter-increment:skill-row;position:relative;padding:22px 0 34px 38px;color:#0a0a0a;background:transparent;border-top:1px solid #aaa79f}
+.skill-group::before{content:counter(skill-row,decimal-leading-zero);position:absolute;left:0;top:25px;color:#77746d;font:9px var(--mono)}
+.skill-group h4{margin:0 0 22px;color:#0a0a0a;font:600 1.05rem var(--sans);text-transform:none}
+.skill-bubbles{gap:7px 0}
+.skill-bubbles span{padding:0;color:#5f5d57;border:0;font:12px var(--mono)}
+.skill-bubbles span:not(:last-child)::after{content:" / ";margin:0 8px;color:#aaa79f}
+@media(max-width:680px){
+  .skill-popup{padding:58px 24px 28px}
+  .skill-popup::before{display:none}
+  .skill-popup h3{margin-bottom:44px}
+  .skill-groups{grid-template-columns:1fr}
+  .skill-group{padding-bottom:26px}
+}
+
+/* Mobile top ribbon */
+@media(max-width:680px){
+  .topbar{
+    grid-template-columns:auto 1fr;
+    gap:12px;
+    padding:14px 0 10px;
+  }
+  .pixel-logo{grid-column:1}
+  .social-links{
+    grid-column:2;
+    display:flex;
+    justify-self:end;
+    gap:7px;
+  }
+  .social-links a{
+    width:38px;
+    height:38px;
+    color:var(--white);
+    border-color:#4a4a46;
+  }
+  .social-links a:hover,
+  .social-links a:focus-visible{
+    color:#000;
+    background:var(--acid);
+    border-color:var(--acid);
+  }
+  .social-icon{width:18px;height:18px}
+  .nav-pill{
+    grid-column:1 / -1;
+    width:100%;
+    justify-content:space-between;
+    gap:10px;
+    padding:5px 0 2px;
+  }
+  .nav-pill a{font-size:8px}
+}
