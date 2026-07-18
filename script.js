@@ -241,11 +241,22 @@ if (projectGroups.length) {
   });
 }
 
-const visualTypes = ["calibration", "markets", "fraud", "cache", "memory", "chess", "cardiac", "motion", "audio"];
+const mlCards = document.querySelector("#project-cards-ml");
+const bravoCard = mlCards
+  ? Array.from(mlCards.querySelectorAll(".project-card")).find((card) => card.querySelector("h4")?.textContent.includes("BravoBOT"))
+  : null;
+if (mlCards && bravoCard) {
+  mlCards.prepend(bravoCard);
+  mlCards.querySelectorAll(".project-card").forEach((card) => card.classList.remove("featured"));
+  bravoCard.classList.add("featured");
+}
+
+const visualTypes = ["rag", "calibration", "markets", "cache", "memory", "chess", "cardiac", "motion", "audio"];
 document.querySelectorAll(".project-card").forEach((card, index) => {
   if (card.querySelector(".project-visual")) return;
+  const visualType = visualTypes[index] || "signal";
   const visual = document.createElement("div");
-  visual.className = `project-visual visual-${visualTypes[index] || "signal"}`;
+  visual.className = `project-visual visual-${visualType}`;
   visual.setAttribute("aria-hidden", "true");
   visual.innerHTML = `
     <span class="visual-kicker">${String(index + 1).padStart(2, "0")} / CASE STUDY</span>
@@ -254,5 +265,42 @@ document.querySelectorAll(".project-card").forEach((card, index) => {
     </div>
     <span class="visual-caption">PARTH PORE — SELECTED WORK</span>
   `;
+  if (visualType === "rag") {
+    visual.querySelector(".visual-art").innerHTML = `
+      <svg class="rag-machine-svg" viewBox="0 0 800 520" role="presentation">
+        <g class="rag-docs">
+          <path d="M350 14h76v82h-76z" class="paper back"/>
+          <path d="M366 7h76v82h-76z" class="paper mid"/>
+          <path d="M383 1h76v82h-76z" class="paper front"/>
+          <path d="M396 22h45M396 38h51M396 54h37M396 70h43" class="paper-lines"/>
+          <path d="M435 72v23" class="feed-line"/>
+          <path d="m422 81 13 15 13-15" class="feed-arrow"/>
+        </g>
+        <g class="rag-machine">
+          <path d="M318 92h190l-34 78H351z" class="hopper"/>
+          <path d="M280 170h310v222H280z" class="machine-body"/>
+          <path d="M304 194h262v174H304z" class="machine-screen"/>
+          <circle cx="370" cy="278" r="47" class="gear"/>
+          <circle cx="370" cy="278" r="13" class="gear-core"/>
+          <circle cx="494" cy="278" r="47" class="gear"/>
+          <circle cx="494" cy="278" r="13" class="gear-core"/>
+          <path d="M413 278h38M432 259v38" class="signal"/>
+          <path d="M314 392v30M556 392v30" class="machine-feet"/>
+          <text x="435" y="343" text-anchor="middle" class="machine-label">RETRIEVE · RERANK · GROUND</text>
+        </g>
+        <g class="rag-answer">
+          <path d="M590 255h55" class="feed-line"/>
+          <path d="m625 241 22 14-22 14" class="feed-arrow"/>
+          <path d="M646 139h112v164l-24 24h-88z" class="answer-paper"/>
+          <path d="M734 303v-24h24" class="answer-fold"/>
+          <path d="m672 177 12 12 26-30" class="answer-check"/>
+          <path d="M671 220h62M671 240h51M671 260h58" class="answer-lines"/>
+          <path d="M671 285h28" class="citation"/>
+        </g>
+        <text x="474" y="66" class="flow-label">DOCUMENTS IN</text>
+        <text x="650" y="350" class="flow-label">ANSWER + SOURCES</text>
+      </svg>
+    `;
+  }
   card.prepend(visual);
 });
